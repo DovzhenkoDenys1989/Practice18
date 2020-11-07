@@ -17,7 +17,7 @@ public class MoneyTransactionUtil {
 
         sendTo(card1, card2, sumTransfer);
 
-//      System.out.println(card2);
+        //    System.out.println(card2);
     }
 
     static class Card {
@@ -56,10 +56,10 @@ public class MoneyTransactionUtil {
 
     public static void sendTo(Card cardNew1, Card cardNew2, double sum) throws RuntimeException {
         if (cardNew1.cardNumber == cardNew2.cardNumber) {
-            throw new RuntimeException("Ошибка: Номера карточек совпадают");
+            throw new AccountException();
         }
         if (sum <= 0 || sum >= 100_000) {
-            throw new RuntimeException("Ошибка: Отрицательный баланс либо привышен лимит по карте");
+            throw new MoneyValueExeption();
         }
         System.out.println("Сумма " + sum + ", со счета " + cardNew1.cardNumber + " успешно переведена на счет " + cardNew2.cardNumber);
 
@@ -67,8 +67,18 @@ public class MoneyTransactionUtil {
         cardNew2.cardSum = cardNew2.cardSum + sum;
     }
 
+    public static void sendTo2(long cardNumber1, long cardNumber2, double sum) throws RuntimeException {
+        if (cardNumber1 == cardNumber2) {
+            throw new AccountException();
+        }
+        if (sum <= 0 || sum >= 100_000) {
+            throw new MoneyValueExeption();
+        }
+    }
+
     private MoneyTransactionUtil() {
     }
 }
+
 
 
